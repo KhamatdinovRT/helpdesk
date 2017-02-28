@@ -1,0 +1,58 @@
+<form action="{% url 'edit_request' form.instance.number %} " method="POST" id="edit_form" class="js-book-update-form">
+    {% load widget_tweaks %} {% csrf_token %}
+    <div class="form-group{% if field.errors %} has-error{% endif %}"></div>
+    <div class="row form-group">
+        <div class="col-sm-4">
+            <label for="{{ form.client.id_for_label }}">Заявитель</label> 
+            {% render_field form.client class="form-control" %}
+            
+        </div>
+        <div class="col-sm-3">
+             <label for="{{ form.worker.id_for_label }}">Исполнитель</label>            
+            {% render_field form.worker class="form-control" %}
+        </div>
+        <div class="col-sm-3">
+            <label for="{{ form.chief.id_for_label }}">Руководитель</label> 
+            {% render_field form.chief class="form-control " %} 
+        </div>
+        <div class="col-sm-2"> 
+            <label for="{{ form.request_status.id_for_label }}">Статус</label> 
+            {% render_field form.request_status class="form-control " %}
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-3"> 
+            <label for="{{ form.structure.id_for_label }}">Корпус</label> 
+            {% render_field form.structure class="form-control " %}
+        </div>
+        <div class="col-sm-1"> 
+            <label for="{{ form.office.id_for_label }}">Кабинет</label> 
+            {% render_field form.office class="form-control " %}
+        </div>
+        <div class="col-sm-4">
+            <label for="{{ form.phone_number.id_for_label }}">Телефон</label> 
+            {% render_field form.phone_number class="form-control " %}
+        </div>
+        <div class="col-sm-2"> 
+            <label for="{{ form.receipt.id_for_label }}">Дата начала</label> 
+            {% render_field form.receipt class="form-control " %}
+        </div>
+        <div class="col-sm-2"> 
+            <label for="{{ form.complete.id_for_label }}">Дата окончания</label> 
+            {% render_field form.complete class="form-control " %}
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-12"> {% render_field form.comments class="form-control " placeholder="Комментарии" %}</div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-12"> {% render_field form.task_other class="form-control" placeholder="Прочее" %}</div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-12"> {% render_field form.tasks %}</div>
+    </div>
+    <hr>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" id="buttonSave">Save changes</button>
+    </div>
+</form>

@@ -1,0 +1,55 @@
+ {% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %} helpdesk App Django {% endblock %} </title>
+    <link rel="stylesheet" href="{% static 'helpdesk/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'helpdesk/css/styles.css' %}" />
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">helpdesk</a>
+            </div>
+            {% if user.is_authenticated %}
+            <div id="navbar" class="navbar-collapse collapse">
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">Sign in</button>
+                </form>
+            </div>
+            {% endif %}
+            <!--/.navbar-collapse -->
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+            
+                {% block content %} {% endblock %}
+            
+        </div>
+
+    <script src="{% static 'helpdesk/js/jquery.min.js' %}"></script>
+    <script src="{% static 'helpdesk/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'helpdesk/js/script.js' %}"></script>
+</body>
+
+</html>

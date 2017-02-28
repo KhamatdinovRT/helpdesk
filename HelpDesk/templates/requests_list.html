@@ -1,0 +1,25 @@
+ {% for i in matches %}
+    {% if i.request_status.name == "Выполнено"%}
+        <tr class="coltrGreen" onclick="load_request_form(this)" data-url="{% url 'edit_request' i.number%}">
+    {% elif i.request_status.name == "Не выполнено"%}
+        <tr class="coltrRed" onclick="load_request_form(this)" data-url="{% url 'edit_request' i.number%}">
+    {% elif i.request_status.name == "Новая"%}
+        <tr class="coltrYellow" onclick="load_request_form(this)" data-url="{% url 'edit_request' i.number%}">
+    {% elif i.request_status.name == "В ожидании"%}
+        <tr class="coltrWhite" onclick="load_request_form(this)" data-url="{% url 'edit_request' i.number%}">
+    {% else%}
+        <tr class="coltrBlue" onclick="load_request_form(this)" data-url="{% url 'edit_request' i.number%}">
+    {% endif %}
+        <td>{{ i.number }}</td>
+        <td>{{ i.client }}</td>
+        <td>{{ i.structure.name }}</td>
+        <td>{{ i.office }}</td>
+        <td>{{ i.phone_number }}</td>
+        <td>{{ i.chief.name }}</td>
+        <td>{{ i.worker.name }}</td>
+        <td>{{ i.receipt|date:"D d M Y" }}</td>
+        <td>{{ i.complete|date:"D d M Y"}}</td>
+        <td>{{ i.call }}</td>
+        <td>{{ i.request_status.name }}</td>
+     </tr>
+{% endfor %}
