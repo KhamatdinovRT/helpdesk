@@ -1,0 +1,15 @@
+ {% for i in matches %}
+        <tr class="coltrWhite" onclick="load_request_form(this)" data-url="{% url 'create_request_from_temp' i.number%}">
+        <td>{{ i.number }}</td>
+        <td>{{ i.client }}</td>
+        <td>{{ i.structure.name }}</td>
+        <td>{{ i.office }}</td>
+        <td>{{ i.phone_number }}</td>
+        <td>{{ i.chief }}</td>
+        <td>{{ i.worker }}</td>
+        <td>{{ i.receipt|date:"D d M Y" }}</td>
+        <td>{{ i.complete|date:"D d M Y"}}</td>
+        <td>{{ i.call }}</td>
+        <td>{{ i.request_status.name }}</td>
+     </tr>
+{% endfor %}

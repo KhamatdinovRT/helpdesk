@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content %}
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="container" id="loginform">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                 <legend>Войти</legend>
+                <div class="form-group {% if form.username.errors %} has-error{% endif %}">
+                    {% comment %}{{ form.username.label_tag }}{% endcomment %}
+                    <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Username">
+                </div>
+                <div class="form-group {% if form.password.errors %} has-error{% endif %}">
+                    {% comment %}{{ form.password.label_tag }}{% endcomment %}
+                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+                </div>
+                {% if form.errors %}
+                <p class="alert-danger alert">Your username and password didn't match. Please try again.</p>
+                {% endif %}
+                <div class="pull-right"><button class="btn btn-primary btn-md" value="login" type="submit" class="btn btn-default">Войти</button></div>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

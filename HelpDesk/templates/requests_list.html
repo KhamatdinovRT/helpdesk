@@ -15,11 +15,12 @@
         <td>{{ i.structure.name }}</td>
         <td>{{ i.office }}</td>
         <td>{{ i.phone_number }}</td>
-        <td>{{ i.chief.name }}</td>
-        <td>{{ i.worker.name }}</td>
+        <td>{{ i.chief }}</td>
+        <td>{{ i.worker }}</td>
         <td>{{ i.receipt|date:"D d M Y" }}</td>
         <td>{{ i.complete|date:"D d M Y"}}</td>
         <td>{{ i.call }}</td>
         <td>{{ i.request_status.name }}</td>
      </tr>
 {% endfor %}
+

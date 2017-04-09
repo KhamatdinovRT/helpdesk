@@ -1,0 +1,59 @@
+        {% load widget_tweaks %} 
+    <div class="row form-group">
+        <div class="col-sm-4">
+            <label for="{{ form.client.id_for_label }}">Заявитель</label> 
+            {% render_field form.client class="form-control" %}
+        </div>
+        <div class="col-sm-3">
+             <label for="{{ form.worker.id_for_label }}">Исполнитель</label>            
+            {% render_field form.worker class="form-control" %}
+        </div>
+        <div class="col-sm-3">
+            <label for="{{ form.chief.id_for_label }}">Руководитель</label>  
+            {% render_field form.chief  class="form-control" %} 
+        </div>
+        <div class="col-sm-2"> 
+            <label for="{{ form.request_status.id_for_label }}">Статус</label> 
+            {% render_field form.request_status class="form-control " %}
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-3"> 
+            <label for="{{ form.structure.id_for_label }}">Корпус</label> 
+            {% render_field form.structure class="form-control " %}
+        </div>
+        <div class="col-sm-1"> 
+            <label for="{{ form.office.id_for_label }}">Кабинет</label> 
+            {% render_field form.office class="form-control " %}
+        </div>
+        <div class="col-sm-4">
+            <label for="{{ form.phone_number.id_for_label }}">Телефон</label> 
+            {% render_field form.phone_number class="form-control " %}
+        </div>
+        <div class="col-sm-2"> 
+            <label for="{{ form.receipt.id_for_label }}">Дата поступления</label> 
+            {% render_field form.receipt|set_data:"provide:datepicker"|set_data:"date-format:dd.mm.yyyy"|set_data:"date-language:ru"|set_data:"date-today-highlight:true"|set_data:"date-today-btn:linked" class="form-control " %}
+        </div>
+        <div class="col-sm-2"> 
+            <label for="{{ form.complete.id_for_label }}">Дата исполнения</label> 
+            {% render_field form.complete|set_data:"provide:datepicker"|set_data:"date-format:dd.mm.yyyy"|set_data:"date-language:ru"|set_data:"date-today-highlight:true"|set_data:"date-today-btn:linked" class="form-control" %}
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-12"> {% render_field form.comments class="form-control " placeholder="Комментарии" %}</div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-12"> {% render_field form.report class="form-control" placeholder="Отчет" %}</div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-12"> {% render_field form.task_other class="form-control" placeholder="Прочее" %}</div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-12"> {% render_field form.tasks %}</div>
+    </div>
+    <hr>
+    <input hidden type="text" name="page" value="">
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" id="buttonSave">Save changes</button>
+        <button class="btn btn-danger" id="buttonDelete" on-tap="delete_request(this)" data-url="{% url 'delete_request' form.instance.number %}">Удолить</button>
+    </div>

@@ -1,33 +1,45 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %} {% load widget_tweaks %} {% comment %}
+<div class="container">{% endcomment %}
+    <div class="row">
+        <div class="panel col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+            <div class="modal-header">
+                <h4>Создание заявки</h4>
+            </div>
+            <div class="modal-body">    
+                <form action="{% url 'req_create' %}" method="POST" id="edit_form">
+                    {% load widget_tweaks %} {% csrf_token %}
 
-{% block content %}
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Table</h3>
-            </div>
-            <div class="panel-body">
-                <table class="table table-striped table-hover ">
-                    <thead>
-                        <!--<tr>
-                            <th>#</th>
-                            <th>Column heading</th>
-                            <th>Column heading</th>
-                            <th>Column heading</th>
-                            <td> <input type="checkbox"></td>
-                        </tr>-->
-                    </thead>
-                    <tbody>
-                        {% for x in items %}
-                        <tr>
-                            
-                            <td>{{x.name}}</td>
-                            <td>{{ x.created|date:"D d M Y" }}</td>
-                            <td>{{ x.description }}</td>
-                           
-                        </tr>
-                         {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="{{ form.client.id_for_label }}">Заявитель</label> 
+                            {% render_field form.client class="form-control"%}
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="{{ form.structure.id_for_label }}">Корпус</label>
+                            {% render_field form.structure class="form-control" %}
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="{{ form.office.id_for_label }}">Кабинет</label> {% render_field form.office class="form-control" %}
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="{{ form.phone_number.id_for_label }}">Телефон</label> {% render_field form.phone_number class="form-control " %}
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-12"> {% render_field form.comments class="form-control " placeholder="Комментарии" %}</div>
+                    </div>
+                    
+                    <div class="row form-group">
+                        <div class="col-sm-12"> {% render_field form.tasks %}</div>
+                    </div>
+                    {{form.tasks.errors}}
+                    <hr>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="buttonSave">Save changes</button>
+                    </div>
+                    <input hidden type="text" name="page" value="">
+                </form>
+            </div>  
         </div>
-{% endblock %}
+    </div>
+    {% comment %}</div>{% endcomment %} {% endblock%}

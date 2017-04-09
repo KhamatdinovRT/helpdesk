@@ -1,0 +1,4 @@
+<form action="{% url 'create_request_from_temp' form.instance.number %} " method="POST" id="edit_form">
+    {% csrf_token %}
+    {% include "partial_request_form.html" %}
+</form>      
