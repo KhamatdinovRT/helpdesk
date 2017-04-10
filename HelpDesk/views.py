@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required, permission_required, 
 from django.http import Http404, HttpResponse
 from django.http import JsonResponse
 from django.core import serializers
+from ast import literal_eval
 from django.forms import formset_factory
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Group
@@ -83,8 +84,8 @@ def save_request_form(request, form, requests, list_template_name, form_template
             data['html_book_list'] = render_to_string(list_template_name, context) 
         else:
             data['form_is_valid'] = False 
-            context = {'form': form}
-            data['html_form'] = render_to_string(form_template_name, context, request=request)
+            # context = {'form': form}
+            # data['html_form'] = render_to_string(form_template_name, context, request=request)
             print (form.errors) 
     else:
         context = {'form': form}
@@ -97,7 +98,7 @@ def create_request_from_temp(request, request_id):
         form = RequestForm(request.POST)
         # temp_request_from_helpdesk.delete()
     else:
-        form = RequestForm(instance=temp_request_from_helpdesk)
+        form = RequestForm(instance=temp_request_from_helpdesk, initial={'tasks': literal_eval(temp_request_from_helpdesk.tasks)})
     requests = TempRequest.objects.order_by('-number')    
     return save_request_form(request, form, requests, 'temp_requests_list.html','modal_create_form.html')
 
@@ -112,7 +113,6 @@ def request_edit(request, request_id):
             form = RequestForm(request.POST, instance=request_from_helpdesk)
     else:
         tasks = RequestTasks.objects.filter(request=request_id).values_list('tasklist', flat=True)
-        print (list(tasks))
         if in_group_worker(request.user):
             form = WorkerRequestForm(instance=request_from_helpdesk, initial={'tasks': list(tasks)})
             print ('worker')
@@ -150,4 +150,5 @@ def create_request(request):
                 phone_number = request.POST["phone_number"],
                 comments = request.POST["comments"]
             )
+            return render (request, 'request_created.html')
     return render(request, 'index.html', {'form': form})

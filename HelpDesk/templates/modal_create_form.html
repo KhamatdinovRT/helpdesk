@@ -1,4 +1,6 @@
 <form action="{% url 'create_request_from_temp' form.instance.number %} " method="POST" id="edit_form">
     {% csrf_token %}
     {% include "partial_request_form.html" %}
+    <button class="btn btn-danger" id="buttonDelete" on-tap="delete_request(this)" data-url="{% url 'delete_request' form.instance.number %}">Удолить</button>
+    </div>
 </form>      

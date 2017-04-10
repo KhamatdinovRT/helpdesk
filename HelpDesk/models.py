@@ -83,7 +83,7 @@ class TempRequest (models.Model):
     office = models.CharField(max_length=38, blank=False)
     phone_number = models.CharField(max_length=38, blank=False, null=False)
     receipt = models.DateField(blank=False, null=True, default=now)
-    tasks = models.CharField(max_length=38, blank=False, null=False)
+    tasks = models.CharField(max_length=150, blank=False, null=False)
     comments = models.CharField(max_length=100, blank=True)
 
     class Meta:

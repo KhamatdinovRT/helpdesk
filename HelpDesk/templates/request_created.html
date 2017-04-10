@@ -1,0 +1,12 @@
+{% extends "base.html" %} 
+ {% load static %}
+ {% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h2 class="text-center">Заявка создана</h2>
+            <img class="center-block" src="{% static 'helpdesk/img/success.png'%}" >
+        </div>
+    </div>
+</div>
+ {% endblock%}

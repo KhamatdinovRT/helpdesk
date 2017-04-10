@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns = [
     url(r'requests/$', views.request_view, name='request'),
-    url(r'requests/temp$', views.temp_requests_view, name='temp_requests'),
+    url(r'temp_requests$', views.temp_requests_view, name='temp_requests'),
     url(r'request/(?P<request_id>\d+)/edit/$', views.request_edit, name='edit_request'),
     url(r'request/temp/(?P<request_id>\d+)/delete/$', views.delete_request_from_temp, name='delete_request'),
     url(r'^request/create/$', views.create_request, name='req_create'),

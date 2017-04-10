@@ -1,11 +1,12 @@
  {% load static %}
+ {% load active_li_tag %}
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name=viewport content="width=device-width, initial-scale=1">
-    <title>{% block title %} helpdesk App Django {% endblock %} </title>
+    <title>{% block title %} helpdesk App {% endblock %} </title>
     <link rel="stylesheet" href="{% static 'helpdesk/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'helpdesk/css/styles.css' %}" />
     <link rel="stylesheet" href="{% static 'helpdesk/css/bootstrap-datepicker3.min.css'%}"> 
@@ -27,13 +28,13 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ><a href="{% url 'login' %}">Sign in</a></li>
                 </ul>
-                
                 {% endif %} 
                 {% if user.is_authenticated %}
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_staff %}
+                    <li class="{% active 'request' %}"><a href="{% url 'request' %}">Потвержденные</a></li>
                     <li><a href="/admin">Admin site</a></li>
-                    <li><a href="{% url 'temp_requests'%}">temp_requests</a></li>
+                    <li class="{% active 'temp_requests' %}"><a href="{% url 'temp_requests'%}">Временные</a></li>
                     {% endif %}
                     
                     <li class="dropdown">

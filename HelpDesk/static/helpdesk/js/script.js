@@ -18,8 +18,6 @@ $(document).ready(function (e) {
                     $("#successMessage").fadeTo(1000, 500).slideUp(500, function () {
                         $("#successMessage").slideUp(500);
                     });
-                } else {
-
                 }
             },
 
@@ -63,7 +61,7 @@ var saveForm = function () {
                 $("#myModal").modal("hide");
                 $("#successMessage").show();
                 $("#successMessage").fadeTo(1000, 500).slideUp(500, function () {
-                $("#successMessage").slideUp(500);
+                    $("#successMessage").slideUp(500);
                 });
             } else {
                 $("#myModal .modal-body").html(data.html_form);
@@ -73,7 +71,7 @@ var saveForm = function () {
             $("#myModal").modal("hide");
             $("#errorMessage").show();
             $("#errorMessage").fadeTo(1000, 500).slideUp(500, function () {
-            $("#errorMessage").slideUp(500);
+                $("#errorMessage").slideUp(500);
             });
         }
 
