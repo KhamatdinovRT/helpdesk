@@ -15,6 +15,7 @@
                         <div class="col-sm-4">
                             <label for="{{ form.client.id_for_label }}">Заявитель</label> 
                             {% render_field form.client class="form-control"%}
+                            {{form.client.errors}}
                         </div>
                         <div class="col-sm-3">
                             <label for="{{ form.structure.id_for_label }}">Корпус</label>
@@ -22,9 +23,12 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="{{ form.office.id_for_label }}">Кабинет</label> {% render_field form.office class="form-control" %}
+                            {{form.office.errors}}
                         </div>
+
                         <div class="col-sm-3">
                             <label for="{{ form.phone_number.id_for_label }}">Телефон</label> {% render_field form.phone_number class="form-control " %}
+                            {{form.phone_number.errors}}                        
                         </div>
                     </div>
                     <div class="row form-group">
