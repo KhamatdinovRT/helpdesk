@@ -31,9 +31,8 @@
                 {% endif %} 
                 {% if user.is_authenticated %}
                 <ul class="nav navbar-nav navbar-right">
-                    {% if user.is_staff %}
                     <li class="{% active 'request' %}"><a href="{% url 'request' %}">Потвержденные</a></li>
-                    <li><a href="/admin">Admin site</a></li>
+                    {% if user.is_staff %}
                     <li class="{% active 'temp_requests' %}"><a href="{% url 'temp_requests'%}">Временные</a></li>
                     {% endif %}
                     

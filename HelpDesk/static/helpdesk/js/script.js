@@ -64,8 +64,8 @@ var saveForm = function () {
                     $("#successMessage").slideUp(500);
                 });
             } else {
-                $("#myModal .modal-body").html(data.html_form);
-            }
+                $( "#errors" ).html(data.form_errors);
+            };
         },
         error: function () {
             $("#myModal").modal("hide");
