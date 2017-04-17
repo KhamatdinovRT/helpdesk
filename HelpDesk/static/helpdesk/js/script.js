@@ -27,16 +27,16 @@ $(document).ready(function (e) {
 });
 
 function load_request_form(sender) {
-    console.log(sender)
-    url = $(sender).attr('data-url');
-    request_id = parseInt(url.replace(/[^0-9\.]/g, ''), 10); // получаем номер заявки
+    console.log(sender);
+    var url = $(sender).attr('data-url');
+    var request_id = parseInt(url.replace(/[^0-9\.]/g, ''), 10); // получаем номер заявки
     console.log(url);
     $.ajax({
         url: url,
         type: 'GET',
         dataType: 'json',
         beforeSend: function () {
-            $("#myModal .modal-header #modal-title").text('Заявка №' + request_id)
+            $("#myModal .modal-header #modal-title").text('Заявка №' + request_id);
             $("#myModal").modal("show");
         },
         success: function (data) {
@@ -48,8 +48,8 @@ function load_request_form(sender) {
 
 var saveForm = function () {
     var form = $(this);
-    page_number = $("#myModal .modal-body").data("page"); // получаем номер страницы 
-    console.log(this)
+    var page_number = $("#myModal .modal-body").data("page"); // получаем номер страницы 
+    console.log(this);
     $.ajax({
         url: form.attr("action"),
         data: form.serialize() + page_number,
@@ -65,7 +65,7 @@ var saveForm = function () {
                 });
             } else {
                 $( "#errors" ).html(data.form_errors);
-            };
+            }
         },
         error: function () {
             $("#myModal").modal("hide");

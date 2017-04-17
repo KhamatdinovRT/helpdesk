@@ -50,28 +50,28 @@ def paginate (queryset, request):
         page_range = paginator.page_range  
     return {'matches':paginated_queryset, 'page_range':page_range, 'num_pages':paginator.num_pages}
 
-def in_group_worker(user):
+def is_superuser(user):
     if user:
-        return Group.objects.get(name='worker') in user.groups.all()
+        return user.is_superuser
     return False
 
 
-@login_required(login_url='login')
+@login_required
 def request_view(request):
     requests = Request.objects.order_by('-number')
     context = paginate (requests, request)
     return render(request, 'request.html', context)
 
-@login_required(login_url='login')
-@user_passes_test(lambda u: Group.objects.get(name='worker') not in u.groups.all(), login_url='login' )
+@login_required
+@user_passes_test(is_superuser)
 def temp_requests_view(request):
     temp_requests = TempRequest.objects.order_by('-number')
     context = paginate (temp_requests, request)
     context["is_temp_requests_page"] = True
     return render(request, 'request.html', context)
 
-@login_required(login_url='login')
-@user_passes_test(lambda u: Group.objects.get(name='worker') not in u.groups.all(), login_url='login' )
+@login_required
+@user_passes_test(is_superuser)
 def create_request_from_temp(request, request_id):
     data = dict ()
     temp_request_from_helpdesk = get_object_or_404(TempRequest, number=request_id)     
@@ -93,12 +93,12 @@ def create_request_from_temp(request, request_id):
         data['html_form'] = render_to_string('modal_create_form.html', context, request=request)
     return JsonResponse(data)   
 
-@login_required(login_url='login')
+@login_required
 def request_edit(request, request_id):
     data = dict()       
     request_from_helpdesk = get_object_or_404(Request, number=request_id)
     if request.method == 'POST':
-        if in_group_worker(request.user):
+        if not is_superuser(request.user):
             form = WorkerRequestForm(request.POST, instance=request_from_helpdesk)
         else:
             form = RequestForm(request.POST, instance=request_from_helpdesk)        
@@ -114,7 +114,7 @@ def request_edit(request, request_id):
             print (form.errors)
     else:
         tasks = RequestTasks.objects.filter(request=request_id).values_list('tasklist', flat=True)
-        if in_group_worker(request.user):
+        if not is_superuser(request.user):
             form = WorkerRequestForm(instance=request_from_helpdesk, initial={'tasks': list(tasks)})
             print ('worker')
         else:
@@ -123,8 +123,8 @@ def request_edit(request, request_id):
         data['html_form'] = render_to_string('modal_edit_form.html', context, request=request)
     return JsonResponse(data)   
 
-@login_required(login_url='login')
-@user_passes_test(lambda u: Group.objects.get(name='worker') not in u.groups.all(), login_url='login' )
+@login_required
+@user_passes_test(is_superuser)
 def delete_request_from_temp(request, request_id, list_template_name="temp_requests_list.html"):
     data=dict()
     if request.method == 'DELETE':
@@ -154,4 +154,6 @@ def create_request(request):
                 comments = request.POST["comments"]
             )
             return render (request, 'request_created.html')
+        else:
+            print(form.errors)
     return render(request, 'index.html', {'form': form})

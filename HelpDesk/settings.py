@@ -91,6 +91,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 AUTH_USER_MODEL = 'HelpDesk.Users'
 LOGIN_REDIRECT_URL = 'request'
+LOGIN_URL = 'login'
 
 
 AUTH_PASSWORD_VALIDATORS = [
