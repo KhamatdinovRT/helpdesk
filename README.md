@@ -3,6 +3,10 @@
 $ pip install requirements
 $ python manage.py runserver
 ```
+```
+login: admin
+password: adminadmin
+```
 ![1](https://cloud.githubusercontent.com/assets/23549996/26795565/96a3d2d0-4a3f-11e7-87f6-d0a9fbca1068.png)
 ![untitled1](https://user-images.githubusercontent.com/23549996/26841575-59968b20-4b03-11e7-8988-868ba48a9453.png)
 ![2](https://cloud.githubusercontent.com/assets/23549996/26796181/ef00f28a-4a41-11e7-9271-c759189a8661.png)
